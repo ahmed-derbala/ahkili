@@ -25,9 +25,34 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port,console.log(`*** SOCKET.IO MONITOR SERVER RUNNING ON PORT ${port}  STARTED AT ${Date(Date.now())} ***`));
+server.listen(port,console.log(`*** AHKILI SERVER RUNNING ON PORT ${port}  STARTED AT ${Date(Date.now())} ***`));
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * 
+ * socket
+ */
+socketClients =0;
+global.io = require("socket.io")(server);
+global.io.sockets.on("connection", socket => {
+  socketClients++;
+  console.log('[connection] : ' + socket.id + ' socketClients '+socketClients);
+  socket.on('disconnect', (reason) => {
+    socketClients--;
+    console.log('[disconnect] : ' + socket.id + ' socketClients '+socketClients);
+  })
+
+  socket.on('error', (error) => {
+    console.log('[ERROR] : ' + socket.id + ' ' + error);
+  });
+
+  socket.on('disconnecting', (reason) => {
+    console.log('[disconnecting] : ' + socket.id + ' ' + reason);
+  });
+
+
+})
 
 /**
  * Normalize a port into a number, string, or false.
