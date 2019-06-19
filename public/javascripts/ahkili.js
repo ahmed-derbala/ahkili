@@ -1,23 +1,73 @@
 $(function () {
     var incoming = 0; //incoming of incoming
-    $("#incoming").val(incoming)
+    //$("#incoming").val(incoming)
+    /**
+     * socket init
+     */
+    server = 'https://ahkili.herokuapp.com';
+    //server = '127.0.0.1:3000';
 
-    $("#socketStatus").html("<p class='red'> configure the server and press listen!</p>")
+    var socket = io(server);
+    /*socket.on('connect', () => {
+        console.log(socket)
+        $("#logs").prepend("<p class='logsGreen'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' connect  ' + "</p>")
+        $("#socketStatus").html("<p class='green'> connected  </p>")
+        $("#socketId").val(socket.id);
+    });*/
+
+    //new
+
+//buttons and inputs
+var message = $("#message")
+var username = $("#username")
+var send_message = $("#send_message")
+var send_username = $("#send_username")
+var chatroom = $("#chatroom")
+var feedback = $("#feedback")
+
+//Emit message
+send_message.click(function(){
+    socket.emit('new_message', {message : message.val()})
+})
+
+//Listen on new_message
+socket.on("new_message", (data) => {
+    feedback.html('');
+    message.val('');
+    chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
+})
+
+//Emit a username
+send_username.click(function(){
+    socket.emit('change_username', {username : username.val()})
+})
+
+//Emit typing
+message.bind("keypress", () => {
+    socket.emit('typing')
+})
+
+//Listen on typing
+socket.on('typing', (data) => {
+    feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
+})
+
+
+    //end new
+
+    
+
+
+   /* $("#socketStatus").html("<p class='red'> configure the server and press listen!</p>")
 
     //var socket = io($("#http").val() + $("#server").val() + ':' + $("#port").val() + $("#namespace").val());
 
     //listenToSocket($("#server").val());
     function listenToSocket(s) {
-        var socket = io($("#http").val() + $("#server").val() + ':' + $("#port").val() + $("#namespace").val());
 
         //socket = io($("#http").val() + s + ':' + $("#port").val());
         //socket.connect();
-        socket.on('connect', () => {
-            console.log(socket)
-            $("#logs").prepend("<p class='logsGreen'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' connect  ' + "</p>")
-            $("#socketStatus").html("<p class='green'> connected  </p>")
-            $("#socketId").val(socket.id);
-        });
+        
         socket.on('connect_timeout', (timeout) => {
             $("#logs").prepend("<p class='message'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' connect_timeout | '+timeout + "</p>")
             $("#socketStatus").html("<p class='red'> connection timeout  </p>")
@@ -106,7 +156,7 @@ $(function () {
         $("#socketStatus").html("<p class='red'> disconnected!  </p>")
 
         socket.disconnect();
-    })
+    })*/
 
     
 
