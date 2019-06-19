@@ -14,27 +14,37 @@
 
 <body>
     <header>
-      <h1>ahkili</h1>
-            <h6>by ahmed derbala</h6>
+        <h1>ahkili</h1>
+        <h4>your id:</h4>
+        <div id="mySocketId"></div>
+
+        <h4>send your id to your friends and receive cool anonymous messages from them !</h4>
+        <div id="socketClients"></div>
+        <h4> connected users</h4>
+
+        <h6>by ahmed derbala</h6>
 
     </header>
 
     <section>
-      <div id="change_username">
-	<input id="username" type="text" />
-	<button id="send_username" type="button">Change username</button>
-      </div>
+        <div id="change_username">
+            <input id="username" type="text" />
+            <button id="send_username" type="button">Change username</button>
+        </div>
     </section>
 
     <section id="chatroom">
-      <section id="feedback"></section>
+        <section id="feedback"></section>
     </section>
 
-    
 
-    <section id="input_zone"> 
-      <input id="message" class="vertical-align" type="text" />
-      <button id="send_message" class="vertical-align" type="button">Send</button>
+
+    <section id="input_zone">
+        
+        <input id="msgTo" placeholder="TO" type="text" />
+
+        <input id="message"  placeholder="Message" type="text" />
+        <button id="send_message"  type="button">Send</button>
     </section>
 
 </body>

@@ -40,7 +40,7 @@
   
   section#chatroom {
       border: 5px inset #8258FA;
-      height: 70%;
+      height: 55%;
       overflow: auto;
   }
   
@@ -63,14 +63,13 @@
   }
   
   input#message {
-      width: 88%;
-      height: 70%;
+      width: 50%;
+      height:100%;
       font-family: 'Comfortaa', sans-serif;
       font-size: 2vh;
   }
   
   button#send_message {
-      display: inline-block;
       height: 70%;
       width: 10%;
   }

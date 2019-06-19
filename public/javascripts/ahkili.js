@@ -8,12 +8,16 @@ $(function () {
     //server = '127.0.0.1:3000';
 
     var socket = io(server);
-    /*socket.on('connect', () => {
-        console.log(socket)
-        $("#logs").prepend("<p class='logsGreen'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' connect  ' + "</p>")
-        $("#socketStatus").html("<p class='green'> connected  </p>")
-        $("#socketId").val(socket.id);
-    });*/
+    socket.on('connect', () => {
+        console.log(socket.id)
+       // $("#logs").prepend("<p class='logsGreen'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' connect  ' + "</p>")
+        //$("#socketStatus").html("<p class='green'> connected  </p>")
+        $("#mySocketId").html(socket.id);
+    });
+    socket.on('from_server',(msg) =>{
+        $("#socketClients").html(msg.socketClients);
+
+    })
 
     //new
 

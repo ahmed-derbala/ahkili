@@ -36,7 +36,9 @@ server.on('listening', onListening);
 socketClients =0;
 global.io = require("socket.io")(server);
 global.io.sockets.on("connection", socket => {
-  /*socketClients++;
+  socketClients++;
+  global.io.sockets.emit('from_server', {socketClients : socketClients});
+
   console.log('[connection] : ' + socket.id + ' socketClients '+socketClients);
   socket.on('disconnect', (reason) => {
     socketClients--;
@@ -49,7 +51,7 @@ global.io.sockets.on("connection", socket => {
 
   socket.on('disconnecting', (reason) => {
     console.log('[disconnecting] : ' + socket.id + ' ' + reason);
-  });*/
+  });
 
   //nre
 
