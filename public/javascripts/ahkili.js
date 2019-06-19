@@ -4,9 +4,9 @@ $(function () {
     /**
      * socket init
      */
-    //server = 'https://ahkili.herokuapp.com';
+    server = 'https://ahkili.herokuapp.com';
     //server = '127.0.0.1:3000';
-    server = '192.168.43.17:3000';
+    //server = '192.168.43.17:3000';
 
 
     var socket = io(server);
