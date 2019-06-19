@@ -4,8 +4,10 @@ $(function () {
     /**
      * socket init
      */
-    server = 'https://ahkili.herokuapp.com';
+    //server = 'https://ahkili.herokuapp.com';
     //server = '127.0.0.1:3000';
+    server = '192.168.43.17:3000';
+
 
     var socket = io(server);
     socket.on('connect', () => {
@@ -38,7 +40,7 @@ send_message.click(function(){
 socket.on("new_message", (data) => {
     feedback.html('');
     message.val('');
-    chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
+    chatroom.append("<p class='message'>" (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds())+ data.username + ": " + data.message + "</p>")
 })
 
 //Emit a username
@@ -68,6 +70,7 @@ socket.on('typing', (data) => {
 
     //listenToSocket($("#server").val());
     function listenToSocket(s) {
+        */
 
         //socket = io($("#http").val() + s + ':' + $("#port").val());
         //socket.connect();
@@ -138,8 +141,8 @@ socket.on('typing', (data) => {
 
 
         })
-    }
-
+    //}
+/*
     //Emit message
     $("#sendBtn").click(function () {
         console.log('EMIT | ' + $("#emit_event").val() + ' data : ' + $("#emit_data").val())

@@ -25,7 +25,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port,console.log(`*** AHKILI SERVER RUNNING ON PORT ${port}  STARTED AT ${Date(Date.now())} ***`));
+server.listen(port, console.log(`*** AHKILI SERVER RUNNING ON PORT ${port}  STARTED AT ${Date(Date.now())} ***`));
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -33,17 +33,17 @@ server.on('listening', onListening);
  * 
  * socket
  */
-socketClients =0;
+socketClients = 0;
 global.io = require("socket.io")(server);
 global.io.sockets.on("connection", socket => {
   socketClients++;
-  global.io.sockets.emit('from_server', {socketClients : socketClients});
+  global.io.sockets.emit('from_server', { socketClients: socketClients });
 
-  console.log('[connection] : ' + socket.id + ' socketClients '+socketClients);
+  console.log('[connection] : ' + socket.id + ' socketClients ' + socketClients);
   socket.on('disconnect', (reason) => {
     socketClients--;
-    console.log('[disconnect] : ' + socket.id + ' socketClients '+socketClients);
-  global.io.sockets.emit('from_server', {socketClients : socketClients});
+    console.log('[disconnect] : ' + socket.id + ' socketClients ' + socketClients);
+    global.io.sockets.emit('from_server', { socketClients: socketClients });
   })
 
   socket.on('error', (error) => {
@@ -58,24 +58,24 @@ global.io.sockets.on("connection", socket => {
 
   console.log('New user connected')
 
-	//default username
-	socket.username = "Anonymous"
+  //default username
+  socket.username = "Anonymous"
 
-    //listen on change_username
-    socket.on('change_username', (data) => {
-        socket.username = data.username
-    })
+  //listen on change_username
+  socket.on('change_username', (data) => {
+    socket.username = data.username
+  })
 
-    //listen on new_message
-    socket.on('new_message', (data) => {
-        //broadcast the new message
-        io.sockets.emit('new_message', {message : data.message, username : socket.username});
-    })
+  //listen on new_message
+  socket.on('new_message', (data) => {
+    //broadcast the new message
+    io.sockets.emit('new_message', { message: data.message, username: socket.username });
+  })
 
-    //listen on typing
-    socket.on('typing', (data) => {
-    	socket.broadcast.emit('typing', {username : socket.username})
-    })
+  //listen on typing
+  socket.on('typing', (data) => {
+    socket.broadcast.emit('typing', { username: socket.username })
+  })
 
   //end new
 
