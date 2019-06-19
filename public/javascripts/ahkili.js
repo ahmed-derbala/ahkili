@@ -4,8 +4,8 @@ $(function () {
     /**
      * socket init
      */
-    //server = 'https://ahkili.herokuapp.com';
-    server = '127.0.0.1:3000';
+    server = 'https://ahkili.herokuapp.com';
+    //server = '127.0.0.1:3000';
 
     var socket = io(server);
     socket.on('connect', () => {
