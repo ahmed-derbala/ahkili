@@ -43,6 +43,7 @@ global.io.sockets.on("connection", socket => {
   socket.on('disconnect', (reason) => {
     socketClients--;
     console.log('[disconnect] : ' + socket.id + ' socketClients '+socketClients);
+  global.io.sockets.emit('from_server', {socketClients : socketClients});
   })
 
   socket.on('error', (error) => {
