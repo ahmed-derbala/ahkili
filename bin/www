@@ -58,12 +58,10 @@ global.io.sockets.on("connection", socket => {
         console.log('[disconnecting] : ' + socket.id + ' ' + reason);
     });
 
-    //nre
 
-    console.log('New user connected')
 
     //default username
-    socket.username = "Anonymous"
+    socket.username = socket.id
 
     //listen on change_username
     socket.on('change_username', (data) => {
@@ -83,7 +81,7 @@ global.io.sockets.on("connection", socket => {
 
     socket.on('private', (data) => {
         console.log('to: ' + data.to);
-        io.sockets.to(data.to).emit('private', { message: data.message, from: data.from });
+        io.sockets.to(data.to).emit('private', { message: data.message, from: socket.username });
     })
 
     //end new

@@ -17,8 +17,9 @@ $(function() {
         $("#mySocketId").html(socket.id);
     });
     socket.on('from_server', (msg) => {
-        console.log(msg)
-        $("#socketClients").html(JSON.stringify(msg));
+        //$("#socketClients").html(JSON.stringify(msg));
+        $("#socketClients").html(msg.length);
+
 
     })
 
