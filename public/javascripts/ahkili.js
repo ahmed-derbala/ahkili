@@ -41,7 +41,7 @@ $(function() {
     })
 
     //Listen on new_message
-    socket.on("private", (data) => {
+    socket.on("message", (data) => {
         feedback.html('');
         message.val('');
         chatroom.append("<p class='message'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' ' + data.from + " : " + data.message + "</p>")
@@ -50,6 +50,10 @@ $(function() {
     //Emit a username
     send_username.click(function() {
         socket.emit('change_username', { username: username.val() })
+    })
+
+    $("#sendMessageBroadcast").click(function() {
+        socket.emit('message_broadcast', { from: socket.id, to: 'all', message: message.val() })
     })
 
     //Emit typing

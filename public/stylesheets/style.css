@@ -44,8 +44,14 @@ section#chatroom {
 
 section#input_zone {
     border: 5px outset #8258FA;
-    height: 10%;
     background-color: #BCA9F5;
+}
+
+#to {
+    height: 30%;
+    width: 30%;
+    max-width: 30%;
+    max-height: 30%;
 }
 
 input#username {

@@ -69,9 +69,9 @@ global.io.sockets.on("connection", socket => {
     })
 
     //listen on new_message
-    socket.on('new_message', (data) => {
+    socket.on('message_broadcast', (data) => {
         //broadcast the new message
-        io.sockets.emit('new_message', { message: data.message, username: socket.username });
+        io.sockets.emit('message', { message: data.message, from: socket.username });
     })
 
     //listen on typing
@@ -81,7 +81,7 @@ global.io.sockets.on("connection", socket => {
 
     socket.on('private', (data) => {
         console.log('to: ' + data.to);
-        io.sockets.to(data.to).emit('private', { message: data.message, from: socket.username });
+        io.sockets.to(data.to).emit('message', { message: data.message, from: socket.username });
     })
 
     //end new
