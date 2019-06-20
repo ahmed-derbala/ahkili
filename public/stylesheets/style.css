@@ -18,6 +18,10 @@ body {
     text-align: center;
 }
 
+#mySocketId {
+    color: red;
+}
+
 h1 {
     font-family: 'Comfortaa', sans-serif;
     margin: 0px;
