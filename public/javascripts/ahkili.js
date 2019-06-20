@@ -6,15 +6,15 @@ $(function() {
      */
     server = 'https://ahkili.herokuapp.com';
     //server = '127.0.0.1:3000';
-    //server = '192.168.43.17:3000';
+    // server = '192.168.43.17:3000';
 
 
     var socket = io(server);
     socket.on('connect', () => {
         console.log(socket.id)
-            // $("#logs").prepend("<p class='logsGreen'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' connect  ' + "</p>")
-            //$("#socketStatus").html("<p class='green'> connected  </p>")
-        $("#mySocketId").html(socket.id);
+        $("#logs").prepend("<p class='logsGreen'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' connect  ' + "</p>")
+        $("#socketStatus").html("<p class='green'> connected  </p>")
+        $("#socketId").html(socket.id);
     });
     socket.on('from_server', (msg) => {
         //$("#socketClients").html(JSON.stringify(msg));

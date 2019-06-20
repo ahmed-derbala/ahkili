@@ -18,7 +18,7 @@ body {
     text-align: center;
 }
 
-#mySocketId {
+#socketId {
     color: red;
 }
 
@@ -80,4 +80,104 @@ p.message {
 
 .message:nth-child(odd) {
     background-color: #81BEF7;
+}
+
+.red {
+    font-size: 2vh;
+    color: red;
+}
+
+.green {
+    font-size: 2vh;
+    color: green;
+}
+
+.orange {
+    font-size: 2vh;
+    color: orange;
+}
+
+.yellow {
+    font-size: 2vh;
+    color: yellow;
+}
+
+.pink {
+    font-size: 2vh;
+    color: pink;
+}
+
+p.logsRed {
+    background-color: red;
+    color: white;
+    margin: 0px;
+    width: 100%;
+    height: 80px;
+    font-size: 2vh;
+    font-family: 'Comfortaa', sans-serif;
+    padding: 1vh;
+}
+
+p.logsPink {
+    background-color: pink;
+    color: white;
+    margin: 0px;
+    width: 100%;
+    height: 80px;
+    font-size: 2vh;
+    font-family: 'Comfortaa', sans-serif;
+    padding: 1vh;
+}
+
+p.logsBlack {
+    background-color: black;
+    color: white;
+    margin: 0px;
+    width: 100%;
+    height: 80px;
+    font-size: 2vh;
+    font-family: 'Comfortaa', sans-serif;
+    padding: 1vh;
+}
+
+p.logsGreen {
+    margin: 0px;
+    width: 100%;
+    color: white;
+    height: 80px;
+    font-size: 2vh;
+    font-family: 'Comfortaa', sans-serif;
+    padding: 1vh;
+    background-color: green;
+}
+
+p.logsOrange {
+    color: white;
+    background-color: orange;
+    margin: 0px;
+    width: 100%;
+    height: 80px;
+    font-size: 2vh;
+    font-family: 'Comfortaa', sans-serif;
+    padding: 1vh;
+}
+
+p.logsYellow {
+    color: white;
+    background-color: yellow;
+    margin: 0px;
+    width: 100%;
+    height: 80px;
+    font-size: 2vh;
+    font-family: 'Comfortaa', sans-serif;
+    padding: 1vh;
+}
+
+div#logs {
+    border: 2px inset #8258FA;
+    height: 500px;
+    width: 500px;
+    max-width: 50%;
+    max-height: 50%;
+    overflow: auto;
 }
