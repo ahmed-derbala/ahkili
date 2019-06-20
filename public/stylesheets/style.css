@@ -41,7 +41,6 @@ section#chatroom {
 section#input_zone {
     border: 5px outset #8258FA;
     height: 10%;
-    text-align: center;
     background-color: #BCA9F5;
 }
 
