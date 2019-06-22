@@ -28,17 +28,16 @@ body {
 div#change_username {
     display: inline-block;
     background-color: #BCA9F5;
-    border: 5px outset #8258FA;
+    border: 1px outset #8258FA;
 }
 
 section#chatroom {
-    border: 5px inset #8258FA;
-    height: 50%;
+    border: 1px inset #8258FA;
+    height: 45%;
     overflow: auto;
 }
 
 section#input_zone {
-    border: 5px outset #8258FA;
     background-color: #BCA9F5;
 }
 

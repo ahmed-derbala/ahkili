@@ -30,7 +30,7 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /**
- * 
+ *
  * socket
  */
 socketClients = [];
@@ -72,9 +72,24 @@ global.io.sockets.on("connection", socket => {
     })
 
     //listen on new_message
-    socket.on('message_broadcast', (data) => {
+    socket.on('broadcast_message', (data) => {
         //broadcast the new message
-        io.sockets.emit('message', { message: data.message, from: socket.username });
+        //io.sockets.emit('message', { message: data.message, from: socket.username });
+        io.sockets.emit('message',data );
+
+    })
+    socket.on('message', (data) => {
+        //broadcast the new message
+        //io.sockets.emit('message', { message: data.message, from: socket.username });
+        io.sockets.emit('message', { data });
+        if (data.to == 'all'){
+          io.sockets.emit('message', { from: data.from, to:data.to, message: data.message });
+
+        } else {
+          io.sockets.to(data.to).emit('message', { message: data.message, from: socket.username });
+
+        }
+
     })
 
     //listen on typing
@@ -82,7 +97,7 @@ global.io.sockets.on("connection", socket => {
         socket.broadcast.emit('typing', { username: socket.username })
     })
 
-    socket.on('private', (data) => {
+    socket.on('private_message', (data) => {
         console.log('to: ' + data.to);
         io.sockets.to(data.to).emit('message', { message: data.message, from: socket.username });
     })

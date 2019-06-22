@@ -2,13 +2,26 @@
 <html>
 
 <head>
+    <script>unloadAllJS()
+
+    function unloadAllJS() {
+        var jsArray = new Array();
+        jsArray = document.getElementsByTagName('script');
+        for (i = 0; i < jsArray.length; i++) { if (jsArray[i].id) { unloadJS(jsArray[i].id) } else { jsArray[i].parentNode.removeChild(jsArray[i]); } }
+    }
+
+    function unloadJS(scriptName) {
+        var head = document.getElementsByTagName('head').item(0);
+        var js = document.getElementById(scriptName);
+        js.parentNode.removeChild(js);
+    }</script>
     <title>ahkili</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="javascripts/socket.io.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="javascripts/ahkili.js"></script>
+    <script type="text/javascript" src="javascripts/ahkili.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 
@@ -26,7 +39,8 @@
 
         <div id="socketClients"></div>
 
-        <h6>by ahmed derbala</h6>
+        <h6><a href="https://www.linkedin.com/in/ahmed-derbala-04a102149/">developed by Ahmed Derbala</a>
+</h6>
 
     </section>
 

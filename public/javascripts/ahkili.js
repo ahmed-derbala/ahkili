@@ -5,25 +5,23 @@ $(function() {
      * socket init
      */
     server = 'https://ahkili.herokuapp.com';
-    //server = '127.0.0.1:3000';
+    //server = '127.0.0.1:3002';
     //server = '192.168.43.17:3000';
 
 
     var socket = io(server);
+
     socket.on('connect', () => {
         console.log(socket.id)
         $("#logs").prepend("<p class='logsGreen'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' connect  ' + "</p>")
         $("#socketStatus").html("<p class='green'> connected  </p>")
         $("#socketId").html(socket.id);
     });
+
     socket.on('from_server', (msg) => {
         //$("#socketClients").html(JSON.stringify(msg));
         $("#socketClients").html(msg.length);
-
-
-    })
-
-    //new
+      })
 
     //buttons and inputs
     var message = $("#message")
@@ -36,7 +34,7 @@ $(function() {
     //Emit message
     send_message.click(function() {
         //socket.emit('new_message', {message : message.val()});
-        socket.emit('private', { from: socket.id, to: $("#to").val(), message: message.val() })
+        socket.emit('private_message', { from: socket.id, to: $("#to").val(), message: message.val() })
 
     })
 
@@ -44,7 +42,7 @@ $(function() {
     socket.on("message", (data) => {
         feedback.html('');
         message.val('');
-        chatroom.append("<p class='message'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' ' + data.from + " : " + data.message + "</p>")
+        chatroom.prepend("<p class='message'>" +nowTimestamp()+ data.from + " : " + data.message + "</p>")
     })
 
     //Emit a username
@@ -53,7 +51,7 @@ $(function() {
     })
 
     $("#sendMessageBroadcast").click(function() {
-        socket.emit('message_broadcast', { from: socket.id, to: 'all', message: message.val() })
+        socket.emit('broadcast_message', { from: socket.id, to: 'all', message: message.val() })
     })
 
     //Emit typing
@@ -91,7 +89,7 @@ $(function() {
     });
     socket.on('disconnect', (reason) => {
         $("#logs").prepend("<p class='logsRed'>" + (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' disconnect | ' + reason + "</p>")
-        $("#socketId").val("")
+        $("#socketId").html('');
         $("#socketStatus").html("<p class='red'> disconnected!  </p>")
     })
     socket.on('reconnect_attempt', (attemptNumber) => {
@@ -172,7 +170,8 @@ $(function() {
 
                 socket.disconnect();
             })*/
-
-
+            function nowTimestamp() {
+                    return (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' | ';
+                }
 
 });
