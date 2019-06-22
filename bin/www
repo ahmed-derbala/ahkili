@@ -62,31 +62,22 @@ global.io.sockets.on("connection", socket => {
     });
 
 
-
-    //default username
-    socket.username = socket.id
-
-    //listen on change_username
-    socket.on('change_username', (data) => {
-        socket.username = data.username
-    })
-
     //listen on new_message
     socket.on('broadcast_message', (data) => {
         //broadcast the new message
-        //io.sockets.emit('message', { message: data.message, from: socket.username });
+        //io.sockets.emit('message', { message: data.message, from: socket.id });
         io.sockets.emit('message',data );
 
     })
     socket.on('message', (data) => {
         //broadcast the new message
-        //io.sockets.emit('message', { message: data.message, from: socket.username });
+        //io.sockets.emit('message', { message: data.message, from: socket.id });
         io.sockets.emit('message', { data });
         if (data.to == 'all'){
           io.sockets.emit('message', { from: data.from, to:data.to, message: data.message });
 
         } else {
-          io.sockets.to(data.to).emit('message', { message: data.message, from: socket.username });
+          io.sockets.to(data.to).emit('message', { message: data.message, from: socket.id });
 
         }
 
@@ -94,12 +85,12 @@ global.io.sockets.on("connection", socket => {
 
     //listen on typing
     socket.on('typing', (data) => {
-        socket.broadcast.emit('typing', { username: socket.username })
+        socket.broadcast.emit('typing', { username: socket.id })
     })
 
     socket.on('private_message', (data) => {
         console.log('to: ' + data.to);
-        io.sockets.to(data.to).emit('message', { message: data.message, from: socket.username });
+        io.sockets.to(data.to).emit('message', { message: data.message, from: socket.id });
     })
 
     //end new

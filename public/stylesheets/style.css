@@ -25,11 +25,7 @@ body {
     color: red;
 }
 
-div#change_username {
-    display: inline-block;
-    background-color: #BCA9F5;
-    border: 1px outset #8258FA;
-}
+
 
 section#chatroom {
     border: 1px inset #8258FA;
@@ -48,7 +44,6 @@ section#input_zone {
     max-height: 30%;
 }
 
-input#username {}
 
 input#message {
     width: 50%;
