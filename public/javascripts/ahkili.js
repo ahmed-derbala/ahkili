@@ -26,13 +26,12 @@ $(function() {
     //buttons and inputs
     var message = $("#message")
     var username = $("#username")
-    var send_message = $("#send_message")
     var send_username = $("#send_username")
     var chatroom = $("#chatroom")
     var feedback = $("#feedback")
 
     //Emit message
-    send_message.click(function() {
+    $("#sendBtn").click(function() {
         //socket.emit('new_message', {message : message.val()});
         socket.emit('private_message', { from: socket.id, to: $("#to").val(), message: message.val() })
 
@@ -51,7 +50,7 @@ $(function() {
         socket.emit('change_username', { username: username.val() })
     })
 
-    $("#sendMessageBroadcast").click(function() {
+    $("#sendAllBtn").click(function() {
         socket.emit('broadcast_message', { from: socket.id, to: 'all', message: message.val() })
     })
 
