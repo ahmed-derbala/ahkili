@@ -61,7 +61,7 @@ $(function() {
 
     //Listen on typing
     socket.on('typing', (data) => {
-        feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
+        feedback.html("<p><i>" + data + " is typing a message..." + "</i></p>")
     })
 
 

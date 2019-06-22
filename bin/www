@@ -85,7 +85,7 @@ global.io.sockets.on("connection", socket => {
 
     //listen on typing
     socket.on('typing', (data) => {
-        socket.broadcast.emit('typing', { username: socket.id })
+        socket.broadcast.emit('typing', socket.id)
     })
 
     socket.on('private_message', (data) => {
