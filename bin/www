@@ -49,11 +49,12 @@ global.io.sockets.on("connection", socket => {
 
     socket.on('disconnect', (reason) => {
         // socketClients--;
-        socketClients.splice(socketClients.indexOf(socket.id), 1)
-        global.io.sockets.emit('from_server', socketClients);
+        global.io.sockets.emit('info', {
+            clientsCount: socket.nsp.server.eio.clientsCount,
+            usersThisMonth: usersThisMonth
+        });
 
-        console.log('[disconnect] : ' + socket.id + ' socketClients ' + socketClients);
-        global.io.sockets.emit('from_server', { socketClients: socketClients });
+        console.log('[disconnect] : ' + socket.id + ' socketClients ' + socket.nsp.server.eio.clientsCount);
     })
 
     socket.on('error', (error) => {
