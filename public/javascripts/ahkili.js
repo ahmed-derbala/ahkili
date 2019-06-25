@@ -39,7 +39,7 @@ $(function() {
 
     //Listen on new_message
     socket.on("message", (data) => {
-      playAlert('purr');
+      playAlert('submarine');
         feedback.html('');
         message.val('');
         chatroom.prepend("<p class='message'>" +nowTimestamp()+ data.from + " : " + data.message + "</p>")
