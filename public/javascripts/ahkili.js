@@ -4,9 +4,9 @@ $(function() {
     /**
      * socket init
      */
-    server = 'https://ahkili.herokuapp.com';
+    //server = 'https://ahkili.herokuapp.com';
     //server = '127.0.0.1:3002';
-    //server = '192.168.43.17:3000';
+    server = '192.168.43.17:3000';
 
 
     var socket = io(server);
@@ -18,10 +18,12 @@ $(function() {
         $("#socketId").html(socket.id);
     });
 
-    socket.on('from_server', (msg) => {
+    socket.on('info', (msg) => {
         //$("#socketClients").html(JSON.stringify(msg));
-        $("#socketClients").html(msg.length);
-      })
+        $("#socketClients").html(msg.clientsCount);
+        $("#usersThisMonth").html(msg.usersThisMonth);
+
+    })
 
     //buttons and inputs
     var message = $("#message")
@@ -39,10 +41,10 @@ $(function() {
 
     //Listen on new_message
     socket.on("message", (data) => {
-      playAlert('submarine');
+        playAlert('tink');
         feedback.html('');
         message.val('');
-        chatroom.prepend("<p class='message'>" +nowTimestamp()+ data.from + " : " + data.message + "</p>")
+        chatroom.prepend("<p class='message'>" + nowTimestamp() + data.from + " : " + data.message + "</p>")
     })
 
     //Emit a username
@@ -170,8 +172,8 @@ $(function() {
 
                 socket.disconnect();
             })*/
-            function nowTimestamp() {
-                    return (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' | ';
-                }
+    function nowTimestamp() {
+        return (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()) + ':' + (new Date().getMilliseconds()) + ' | ';
+    }
 
 });
