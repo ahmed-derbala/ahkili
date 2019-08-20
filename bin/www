@@ -1,12 +1,8 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
-
 var app = require('../app');
 var debug = require('debug')('ahkili:server');
 var http = require('http');
+const packagejson = require('../package.json');
+const ip = require("ip");
 
 /**
  * Get port from environment and store in Express.
@@ -24,8 +20,8 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
-server.listen(port, console.log(`*** AHKILI SERVER RUNNING ON PORT ${port}  STARTED AT ${Date(Date.now())} ***`));
+const appStartedAt = Date(Date.now());
+server.listen(port, console.log(`*** ${packagejson.name} ${packagejson.version} http://${ip.address()}:${port}/ STARTED AT ${appStartedAt} ***`));
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -161,3 +157,5 @@ function onListening() {
         'port ' + addr.port;
     debug('Listening on ' + bind);
 }
+exports.port = port;
+exports.appStartedAt = appStartedAt;
