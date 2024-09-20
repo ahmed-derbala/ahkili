@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node --watch ./bin/www",
+    "push": "git add . && git commit -m",
+    "postpush": "git push && npm start"
   },
   "dependencies": {
     "app-root-path": "^2.2.1",
